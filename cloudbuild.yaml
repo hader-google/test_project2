@@ -1,0 +1,23 @@
+steps:
+  - name: ubuntu
+    args:
+      - '-c'
+      - 'echo "Hello from Cloud Build! Current date: $(date)"'
+    entrypoint: bash
+  - name: python:3.11
+    env:
+      - GCP_PROJECT_ID=$PROJECT_ID
+    args:
+      - '-c'
+      - |
+        pip install "google-cloud-aiplatform[adk,agent_engines]" google-adk
+
+        adk deploy agent_engine \
+          --project=agenticproductfoundry-489717 \
+          --region=us-central1 \
+          --display_name="My First Agent" \
+          multi_tool_agent
+    dir: agent_skeleton
+    entrypoint: bash
+options:
+  logging: CLOUD_LOGGING_ONLY
