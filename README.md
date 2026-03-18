@@ -1,1 +1,1 @@
-ADK Agent Archetype for test_project2
+ADK Agent Archetype for test_project2 test trigger
